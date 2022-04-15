@@ -6,23 +6,8 @@
         <i class="circle-preloader"></i>
         <img src="{% static 'img/core-img/hamburger.png' %}" alt="">
     </div>
-
-    <!-- Search Wrapper -->
-    <div class="search-wrapper">
-        <!-- Close Btn -->
-        <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <form action="#" method="post">
-                        <input type="search" name="search" placeholder="O que está procurando...">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    {% include 'partials/busca.html' %}
 
     {% include 'partials/menu.html' %}
 
@@ -51,7 +36,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="receipe-slider owl-carousel">
+                        {% if receitas.foto_da_receita == '' %}
                         <img src="{% static 'img/bg-img/tomate_banner.jpg' %}">
+                        {% else %}
+                        <img src="{{ receitas.foto_da_receita.url }}">
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -64,7 +53,7 @@
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <div class="receipe-headline my-5">
-                            <span>{{receitas.data_receita}}</span>
+                            <span>{{receitas.data_da_receita}}</span>
                             <h2>{{receitas.nome_receita}}</h2>
                             <div class="receipe-duration">
                                 <h6>Preparo: {{receitas.tempo_preparo}} minutos</h6>
