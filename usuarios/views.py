@@ -1,14 +1,22 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as login_auth
+
 
 def login(request):
     if request.method == 'POST':
         email = request.POST['email']
-        senha = request.POST['password']
+        senha = request.POST['senha']
         if email == "" or senha == "":
             return redirect('login')
-        else:
-            return redirect('dashboard')
+        if User.objects.filter(email=email).exists():
+            nome = User.objects.filter(email=email).values_list('username', flat=True).get()
+            user = authenticate(request, username=nome, password=senha)
+            if user is not None:
+                login_auth(request, user)
+                print('Login realizado')
+                return redirect('dashboard')
     return render(request, 'usuario/login.html')
 
 def dashboard(request):
@@ -28,7 +36,7 @@ def cadastro(request):
             return redirect('cadastro')
         if User.objects.filter(email=email).exists():
             return redirect('cadastro')
-        user = User.objects.create(username=nome, email=email, password=senha)
+        user = User.objects.create_user(username=nome, email=email, password=senha)
         user.save()
         return redirect('login')
     else:
