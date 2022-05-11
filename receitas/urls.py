@@ -1,8 +1,13 @@
 from django.urls import path
-from . import views
+from .views import *
+
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('receita/<int:receitas_id>', views.receita, name='receita_id'),
-    path('buscar', views.buscar, name='buscar')
+    path('', index, name='index'),
+    path('receita/<int:receita_id>', receita, name='receita_id'),
+    path('buscar', buscar, name='buscar'),
+    path('criacao_receita', criacao_receita, name='criacao_receita'),
+    path('deletar/<int:receita_id>', deleta_receita, name='deleta_receita'),
+    path('editar/<int:receita_id>', editar_receita, name='editar_receita'),
+    path('atualizar', atualizar_receita, name='atualizar_receita')
 ]
