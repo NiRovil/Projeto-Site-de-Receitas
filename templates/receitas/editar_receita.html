@@ -56,7 +56,11 @@
                             </div>
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Foto utilizada</b></label>
+                                {% if foto_da_receita == None %}
+                                <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                                {% else %}
                                 <img src="{{ receita.foto_da_receita.url }}" alt="">
+                                {% endif %}
                             </div>
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Adicionar nova foto</b></label>
