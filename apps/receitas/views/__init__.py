@@ -1,1 +1,0 @@
-from .receita import *
